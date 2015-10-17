@@ -6,10 +6,12 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 
 import static android.text.Html.fromHtml;
@@ -45,6 +48,7 @@ public class SplashScreen extends AppCompatActivity{
     private Request request=null;
     final AnimatorSet mAnimationSet = new AnimatorSet();
     static boolean JSONloaded=false;
+    Intent postList=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,7 @@ public class SplashScreen extends AppCompatActivity{
             client=new OkHttpClient();
             request=new Request.Builder().url(blogURL + NUMBER_OF_POSTS).build();
             Call call=client.newCall(request);
+            postList=new Intent(this, ListPosts.class);
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Request request, IOException e) {
@@ -69,9 +74,20 @@ public class SplashScreen extends AppCompatActivity{
                 public void onResponse(Response response) throws IOException {
                     try {
                         if (response.isSuccessful()) {
-                            Log.v(TAG, response.body().string());
+                            String jsonData=response.body().string();
+                            Log.v(TAG,jsonData );
                             JSONloaded=true;
+                            try {
+                                mBlogData=new JSONObject(jsonData);
+                                if(mBlogData!=null){
 
+
+                                    postList.putExtra("mBlogData", mBlogData.toString());
+                                    startActivity(postList);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
 
                     } catch (IOException e) {
@@ -79,6 +95,7 @@ public class SplashScreen extends AppCompatActivity{
                     }
                 }
             });
+
             mAnimationSet.play(animFadein).after(animFadeOut);
             mAnimationSet.addListener(new AnimatorListenerAdapter() {
 
@@ -87,6 +104,8 @@ public class SplashScreen extends AppCompatActivity{
                     super.onAnimationEnd(animation);
                     if(!JSONloaded)
                              mAnimationSet.start();
+
+
                 }
 
             });

@@ -5,13 +5,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_list_blog_post">ListBlogPost</string>
     <string name="title_activity_blog_post">BlogPost</string>
-    <string name="WelcomeString">Welcome to All About Ubuntu</string>
-    <string name="title_activity_blog_post_lister">All About Ubuntu</string>
+    <string name="WelcomeString">Welcome to Insane Circuits</string>
+    <string name="title_activity_blog_post_lister">Insane Circuits</string>
     <string name="titeString">All About Ubuntu</string>
     <string name="NO_CONTENT">No content to display!</string>
     <string name="errorMessage">Connection Error</string>
-    <string name="error_connection">Error 404: No data from All About Ubuntu!</string>
-    <string name="webURL_link">http://www.allaboutubuntu.com/?feed=json&amp;count=</string>
+    <string name="error_connection">Something wrong!</string>
     <string name="title_activity_display__post_data">Display_PostData</string>
     <string name="error_title">Error Code: 404</string>
     <string name="error_message">Could not fetch post!</string>
