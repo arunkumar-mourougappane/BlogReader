@@ -83,6 +83,7 @@ public class SplashScreen extends AppCompatActivity{
 
 
                                     postList.putExtra("mBlogData", mBlogData.toString());
+                                    postList.putExtra("postCount", NUMBER_OF_POSTS);
                                     startActivity(postList);
                                 }
                             } catch (JSONException e) {
@@ -102,7 +103,7 @@ public class SplashScreen extends AppCompatActivity{
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    if(!JSONloaded)
+                    if((!JSONloaded)&& (loopLogo.getAlpha()==1.0))
                              mAnimationSet.start();
 
 

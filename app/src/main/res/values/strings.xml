@@ -30,4 +30,5 @@
     <string name="shareIcons">iconShare</string>
     <string name="shareContent">shareContent</string>
     <string name="networkErrorMessage">Could not connect to internet...</string>
+    <string name="featuredImage">featuredImage</string>
 </resources>
